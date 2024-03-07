@@ -16,6 +16,27 @@ xrand(int min, int max)
 }
 
 typedef struct _solution {
+/* board: represents a solution, in other words, a board state.
+ *
+ * a board of size 4 is represented with an array of numbers:
+ * [0, 1, 2, 3]. board[i] encodes at which row the queen in column i is
+ * located.
+ *
+ * for example the board
+ *   --------
+ * 3|- - - Q |
+ * 2|Q - - - |
+ * 1|- - Q - |
+ * 0|- Q - - |
+ *   --------
+ *   0 1 2 3
+ * is encoded as [2, 0, 1, 3]
+ * and its fitness function evaluates to 2 since the queens at (0,1) and (1,2)
+ * can see eachother.
+ *
+ * a consequence of this encoding is that no queens can be located in the same
+ * column.
+ */
   char *board;
   int size;
 } solution;
@@ -58,18 +79,10 @@ solution_random_successor(solution *s)
   return next;
 }
 
-/* [0 3 3 2 1 ]
- * [. . . . . ]
- * [. Q Q . . ]
- * [. . . Q . ]
- * [. . . . Q ]
- * [Q . . . . ]
- */
-
+/* returns the number of queens that sees other queens */
 int
 solution_fitness(solution *s)
 {
-  /* BOARD_SIZE - n queens that see eachother */
   int sum = 0;
 
   /* check same row */
