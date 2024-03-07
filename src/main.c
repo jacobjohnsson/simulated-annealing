@@ -18,7 +18,6 @@ xrand(int min, int max)
 typedef struct _solution {
   char *board;
   int size;
-  //int fitness;
 } solution;
 
 solution *
@@ -27,7 +26,6 @@ solution_new(int board_size)
   solution *s = malloc(sizeof(solution));
   s->board = calloc(sizeof(char), board_size);
   s->size = board_size;
-  //s->fitness = -1;
 
   return s;
 }
@@ -73,12 +71,6 @@ solution_fitness(solution *s)
 {
   /* BOARD_SIZE - n queens that see eachother */
   int sum = 0;
-
-  /*
-  if (s->fitness != -1) {
-    return s->fitness;
-  }
-  */
 
   /* check same row */
   for (int col = 0; col < s->size - 1; col++) {
