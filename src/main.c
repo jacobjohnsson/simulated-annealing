@@ -7,8 +7,8 @@
 
 #include "queens.h"
 
-static const double FREEZE_POINT = 0.0001;
-static const int N_RUNS = 5;
+static const double FREEZE_POINT = 0.001;
+static const int N_RUNS = 10;
 
 double
 cooling_schedule (int step) {
@@ -69,12 +69,11 @@ int main(int argc, char **argv)
   srand(1);
   /* use random seed for testing the application */
   //srand(time(NULL));
-  int incorrect = 0;
+  int correct = 0;
   int i;
 
   for (i = 0; i < N_RUNS; i++) {
-    queens *initial = queens_new(BOARD_SIZE);
-    queens_randomize(initial);
+    queens *initial = queens_initial(BOARD_SIZE);
     printf("---------------------\n");
     printf("Initial board:\n");
     queens_print(initial);
@@ -84,13 +83,13 @@ int main(int argc, char **argv)
     printf("Final board:\n");
     queens_print(s);
 
-    if (queens_fitness(s) != 0) {
-      incorrect++;
+    if (queens_fitness(s) == 0) {
+      correct++;
     }
     queens_free(s);
   }
 
-  printf("%d / %d\n", incorrect, i);
+  printf("%d / %d\n", correct, i);
 
   return 0;
 }

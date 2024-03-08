@@ -39,7 +39,7 @@ rand_from_to(int min, int max)
 }
 
 
-queens *
+static queens *
 queens_new(int board_size)
 {
   queens *q = malloc(sizeof(queens));
@@ -49,6 +49,14 @@ queens_new(int board_size)
   return q;
 }
 
+static void
+queens_randomize(queens *q)
+{
+  for (int i = 0; i < BOARD_SIZE; i++) {
+    q->board[i] = rand_from_to(0, BOARD_SIZE);
+  }
+}
+
 void
 queens_free(queens *q)
 {
@@ -56,12 +64,13 @@ queens_free(queens *q)
   free(q);
 }
 
-void
-queens_randomize(queens *q)
+queens *
+queens_initial(int board_size)
 {
-  for (int i = 0; i < BOARD_SIZE; i++) {
-    q->board[i] = rand_from_to(0, BOARD_SIZE);
-  }
+  queens *q = queens_new(board_size);
+  queens_randomize(q);
+
+  return q;
 }
 
 queens *
