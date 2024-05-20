@@ -20,15 +20,15 @@ struct _queens {
  * 0|- Q - - |
  *   --------
  *   0 1 2 3
- * is encoded as [2, 0, 1, 3]
- * and its fitness function evaluates to 2 since the queens at (0,1) and (1,2)
- * can see eachother.
+ * is encoded as [2, 0, 1, 3]  and its fitness function evaluates to 5 since
+ * 5 queens don't attack eachother.
  *
  * a consequence of this encoding is that no queens can be located in the same
  * column.
  */
-  char *board;
+  int *board;
   int size;
+  int fitness;
 };
 
 /* return a random number in [min, max] */
@@ -43,8 +43,9 @@ static queens *
 queens_new(int board_size)
 {
   queens *q = malloc(sizeof(queens));
-  q->board = calloc(sizeof(char), board_size);
+  q->board = calloc(sizeof(int), board_size);
   q->size = board_size;
+  q->fitness = -1;
 
   return q;
 }
@@ -77,7 +78,7 @@ queens *
 queens_random_successor(queens *q)
 {
   queens *next = queens_new(BOARD_SIZE);
-  memcpy(next->board, q->board, next->size * sizeof(char));
+  memcpy(next->board, q->board, next->size * sizeof(int));
 
   int column = rand_from_to(0, next->size);
   int new_row = rand_from_to(0, next->size);
@@ -86,38 +87,39 @@ queens_random_successor(queens *q)
   return next;
 }
 
-/* returns the number of queens that sees other queens */
+/* returns the number non-attacking *pairs* of queens */
 int
 queens_fitness(queens *q)
 {
   int sum = 0;
+  int *board = q->board;
 
-  /* check same row */
+  if (q->fitness != -1) {
+    return q->fitness;
+  }
+
   for (int col = 0; col < q->size - 1; col++) {
     for (int j = col + 1; j < q->size; j++) {
-      if (q->board[col] == q->board[j]) {
-        sum += 1;
+
+      /* same row */
+      if (board[col] == board[j]) {
+        continue;
       }
+
+      /* up diagonal */
+      if (board[col] + j - col == board[j]) {
+        continue;
+      }
+
+      /* down diagonal */
+      if (board[col] - (j - col) == board[j]) {
+        continue;
+      }
+      sum += 1;
     }
   }
 
-  /* check up diagonal */
-  for (int col = 0; col < q->size - 1; col++) {
-    for (int j = col + 1; j < q->size; j++) {
-      if (q->board[col] + j - col == q->board[j]) {
-        sum += 1;
-      }
-    }
-  }
-
-  /* check down diagonal */
-  for (int col = 0; col < q->size - 1; col++) {
-    for (int j = col + 1; j < q->size; j++) {
-      if (q->board[col] - (j - col) == q->board[j]) {
-        sum += 1;
-      }
-    }
-  }
+  q->fitness = sum;
 
   return sum;
 }
@@ -131,4 +133,3 @@ queens_print(queens *q)
   }
   printf("]: %d\n", queens_fitness(q));
 }
-

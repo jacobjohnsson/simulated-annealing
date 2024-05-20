@@ -1,6 +1,6 @@
 typedef struct _queens queens;
 
-static const int BOARD_SIZE = 8;
+static const int BOARD_SIZE = 100;
 
 void queens_free(queens *q);
 queens * queens_initial(int board_size);
