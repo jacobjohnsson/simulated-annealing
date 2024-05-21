@@ -30,7 +30,14 @@ For documentation, see man operf(1)
 
 ### Installation
 
+##### Ubuntu
+
     apt install operf
+    echo 1 > /proc/sys/kernel/perf_event_paranoid
+
+##### Debian
+
+    apt install linux-perf
     echo 1 > /proc/sys/kernel/perf_event_paranoid
 
 ### Usage
