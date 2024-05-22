@@ -1,5 +1,23 @@
 # Guide to some tools
 
+## Hyperfine
+
+A command-line benchmarking tool: https://github.com/sharkdp/hyperfine. It is
+very easy to use for quick benchmarking.
+
+### Installation
+
+Can be found on the github page, linked above.
+
+### Usage
+
+We only need its basic functionality:
+
+    hyperfine ./main.out
+
+I suggest that you use this tool (or any other benchmarking tool) to determine
+if your changes has had the desired effect on execution time.
+
 ## Operf
 
 With Operf we can use the processor itself to figure out what it is up to. It
