@@ -28,7 +28,6 @@ struct _queens {
  */
   int *board;
   int size;
-  int fitness;
 };
 
 /* return a random number in [min, max] */
@@ -45,7 +44,6 @@ queens_new(int board_size)
   queens *q = malloc(sizeof(queens));
   q->board = calloc(sizeof(int), board_size);
   q->size = board_size;
-  q->fitness = -1;
 
   return q;
 }
@@ -94,10 +92,6 @@ queens_fitness(queens *q)
   int sum = 0;
   int *board = q->board;
 
-  if (q->fitness != -1) {
-    return q->fitness;
-  }
-
   for (int col = 0; col < q->size - 1; col++) {
     for (int j = col + 1; j < q->size; j++) {
 
@@ -118,8 +112,6 @@ queens_fitness(queens *q)
       sum += 1;
     }
   }
-
-  q->fitness = sum;
 
   return sum;
 }
