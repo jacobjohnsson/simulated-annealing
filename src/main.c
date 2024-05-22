@@ -13,14 +13,14 @@ static const int N_RUNS = 5;
 double
 cooling_schedule (int step)
 {
-  return 1.0 / (step / 4);
+  return 1.0 / step;
 }
 
 double
 log_cooling_schedule (int step)
 {
   double c = 0.25;
-  return c / (log(1 + step));
+  return c / log(1 + step);
 }
 
 bool
