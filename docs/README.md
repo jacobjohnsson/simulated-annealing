@@ -85,19 +85,19 @@ TODO
 ### Simulated Annealing in a Nutshell
 
 When trying to solve a hard problem it is sometimes very difficult to find an
-exact solution. So instead we design algorithms to approximate a good solution.
+exact solution. So instead, we design algorithms to approximate a good solution.
 A very simple example of such an algorithm is the *Hill Climbing* algorithm. The
 Hill Climbing algorithm starts with an arbitrary solution to the problem and
-examines that solutions neghbours. If any of the neighbours are better, keep it
-and continue looking for better neighbours. If no better neighbours are found
-the algorithm is done and the current solution is the best solution so far. The
-Hill Climbing algorithm can easily get stuck on a local maximum with zero chance
-of escaping.
+examines that solution's neighbors. If any of the neighbors are better, keep it
+and continue looking for better neighbors. If no better neighbors are found, the
+algorithm is done and the current solution is the best solution so far. The Hill
+Climbing algorithm can easily get stuck on a local maximum with zero chance of
+escaping.
 
 *Simulated Annealing* attempts to remedy this issue by accepting a worse
 solution with some probability that depends on a temperature and the "badness"
-of the solution. At every iteration the temperature will decrease according to a
-schedule, thereby decreasing the probability of accepting a worse solution. If
+of the solution. At every iteration, the temperature will decrease according to
+a schedule, thereby decreasing the probability of accepting a worse solution. If
 the temperature is lowered slowly, the probability of finding the optimal
 solution approaches 1, which is pretty cool I think (please excuse the pun).
 
@@ -123,7 +123,7 @@ They can also be aborted mid-run and produce the so far best solution.
 
 8-Queens is a toy problem where the goal is to place 8 queens on a chess board
 such that no queens attack any other queen. Remember that a queen attacks any
-other queen if it is in the same row, column or diagonal. An attemt at a
+other queen if it is in the same row, column or diagonal. An attempt at a
 solution:
 
     Q . . . . . . .
@@ -135,16 +135,16 @@ solution:
     . . . Q . . . .
     . . . . . . Q .
 
-This is not a solution becase two pairs of queens attack eachother.
+This is not a solution because two pairs of queens attack each other.
 
 We only need to provide a **cooling schedule**, a way of **generating
-neighbours** and a **fitness evaluation function** in order to solve this program
+neighbors** and a **fitness evaluation function** in order to solve this program
 using simulated annealing. But before we define those things, we start with the
 encoding:
 
 A board of size 4 is represented with an array of numbers: [0, 1, 2, 3].
-board[i] encodes at which row the queens in column i is located. For example the
-board
+board[i] encodes at which row the queens in column i is located. For example,
+the board
 
       --------
     3|- - - Q |
@@ -154,7 +154,7 @@ board
       --------
       0 1 2 3
 
-is encoded as [2, 3, 1, 3]. A consequense of this encoding is that no queens can
+is encoded as [2, 0, 1, 3]. A consequence of this encoding is that no queens can
 be located in the same column since it cannot be encoded.
 
 While reviewing the code you *will* find many inefficiencies, that's the point.
@@ -175,12 +175,12 @@ Cooling schedule 2
 
 Feel free to test both or implement your own.
 
-##### Neighbour Generation
+##### Neighbor Generation
 
 Is done by randomly selecting a new row for a randomly selected queen. In other
-words moving a queen up or down.
+words, moving a queen up or down.
 
 ##### Fitness Evaluation Function
 
 The current fitness function returns the number of queen pairs that are *not*
-attacking eachother. The fitness value for the board above would be five.
+attacking each other. The fitness value for the board above would be five.
