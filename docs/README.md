@@ -53,6 +53,9 @@ We will measure a program running simulated annealing to solve the 8-queens
 problem. This program optimized for readability and "un-performance". Feel free
 to improve upon it *after* you have identified issues using a tool.
 
+To include source code in the annotations the application must be compiled with
+-ggdb.
+
 Begin by recording the program:
 
                     name of event to be profiled (cycles, branch-misses,
