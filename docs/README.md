@@ -34,10 +34,10 @@ pun).
         if T = 0:
           return current
         fitness_diff = next.value - current.value
-        next = randomly_selected_neighbour_of(current, fitness_diff)
+        next = get_random_neighbor(current)
         if fitness_diff > 0:
           current = next
-        else if accept_worse_solution(T):
+        else if accept_worse_solution(T, fitness_diff):
           current = next
 
 The drawbacks are of course that the algorithm may get stuck on a local optimum
