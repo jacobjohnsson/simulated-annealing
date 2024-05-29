@@ -44,7 +44,7 @@ The drawbacks are of course that the algorithm may get stuck on a local optimum
 instead of the global optimum and that it is difficult to apply in continous
 state spaces. The advantages of these types of algorithms (local search
 heuristic algorithms) are that they require very little constant memory, as long
-as one doesn't vare about the path to the solution. They can also be aborted
+as one doesn't care about the path to the solution. They can also be aborted
 mid-run and produce the best solution so far.
 
 ### 8-Queens
@@ -63,7 +63,7 @@ solution:
     . . . Q . . . .
     . . . . . . Q .
 
-This is not a solution because two pairs of queens attack each other.
+This is not a proper solution because two pairs of queens attack each other.
 
 We only need to provide a **cooling schedule**, a way of **generating
 neighbors** and a **fitness evaluation function** in order to solve a problem
@@ -82,13 +82,13 @@ the board
       --------
       0 1 2 3
 
-is encoded as [2, 0, 1, 3]. This is easily extended to larger boards.A
+is encoded as [2, 0, 1, 3]. This is easily extended to larger boards. A
 consequence of this encoding is that no queens can be located in the same column
 since it cannot be encoded.
 
 While reviewing the code you *will* find many inefficiencies, that's the point.
-Resist the urge to improve upon the code until you have identified the culprit
-that is responsible for the largest inefficiency.
+**Resist the urge to improve upon the code until you have identified the culprit
+that is responsible for the largest inefficiency.**
 
 #### Cooling Schedule
 
@@ -172,12 +172,21 @@ For more events, run 'perf list'.
 Now it's time to get our hands dirty.
 
 We will measure the program running simulated annealing to solve the 8-queens
-problem described above. This program optimized for readability and
+problem described above. This program is optimized for readability and
 "un-performance". Feel free to improve upon it *after* you have identified
 issues using a tool.
 
 To include source code in the annotations the application must be compiled with
 -ggdb.
+
+##### Step 0
+
+Familiarize yourself with the source code and run the program.
+
+The program is compiled using 'make' which creates ./main.out.
+
+Running the program will produce output that shows the results of attempting to
+solve the queens problem a couple of times.
 
 ##### Step 1
 
@@ -208,10 +217,8 @@ We can examine the data by running
 
     perf report
 
-which presents us with all symbols, and the number of times they were sampled,
+which presents us with all symbols, and the number of times they were sampled
 (among other stuff).
-
-##### Step 3
 
 The second useful tool is
 
@@ -226,7 +233,7 @@ disable optimizations.
 If one does this with the simulated annealing program one should find that the
 program spends about 99 % of its time in *queens_fitness()*.
 
-##### Step 4
+##### Step 3
 
 Use perf to determine why (or rule out why *not*) *queens_fitness()* takes so
 much time.
@@ -235,7 +242,7 @@ Write down your thoughts, we will discuss your findings!
 
     TIP 1: Use 'perf list' to find other events than 'cycles'.
 
-##### Step 5
+##### Step 4
 
 Try to remedy the problem by modifying the source code.
 
