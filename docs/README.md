@@ -207,9 +207,9 @@ finished.
 
 For example:
 
-    perf record -e cycles main.out
+    perf record -e cycles ./main.out
 
-The output is saved in a directory called **perf.data**.
+The output is saved in a file called **perf.data**.
 
 ##### Step 2
 

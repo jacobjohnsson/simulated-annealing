@@ -21,7 +21,7 @@ struct _queens {
  *   --------
  *   0 1 2 3
  * is encoded as [2, 0, 1, 3]  and its fitness function evaluates to 5 since
- * 5 queens don't attack eachother.
+ * 5 pairs of queens don't attack eachother.
  *
  * a consequence of this encoding is that no queens can be located in the same
  * column.
