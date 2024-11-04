@@ -10,14 +10,15 @@ In part two, we will take a closer look on flame graphs...
 ### Simulated Annealing in a Nutshell
 
 When trying to solve a hard problem it is sometimes very difficult to find an
-exact solution. So instead, we design algorithms to approximate a good solution.
-A very simple example of such an algorithm is the *Hill Climbing* algorithm. The
-Hill Climbing algorithm starts with an arbitrary solution (no matter how
-terrible, we just need a valid state) to the problem and examines that
-solution's neighbors. If any of the neighbors are better, keep it and continue
-looking for better neighbors. If no better neighbors are found, the algorithm is
-done and the current solution is the best solution so far. The Hill Climbing
-algorithm can easily get stuck on a local maximum with zero chance of escaping.
+exact solution. So instead, we design algorithms to approximate an exact
+solution. A very simple example of such an algorithm is the *Hill Climbing*
+algorithm. The Hill Climbing algorithm starts with an arbitrary solution (no
+matter how terrible, we just need a valid state) to the problem and examines
+that solution's neighbors. If any of the neighbors are better, keep it and
+continue looking for better neighbors. If no better neighbors are found, the
+algorithm is done and the current solution is the best solution so far. The
+Hill Climbing algorithm can easily get stuck on a local maximum with zero
+chance of escaping.
 
 *Simulated Annealing* attempts to remedy this issue by accepting a worse
 solution with some probability that depends on a temperature and the fitness (or
@@ -33,15 +34,15 @@ pun).
         T = schedule(t)
         if T = 0:
           return current
-        fitness_diff = next.value - current.value
         next = get_random_neighbor(current)
+        fitness_diff = next.value - current.value
         if fitness_diff > 0:
           current = next
         else if accept_worse_solution(T, fitness_diff):
           current = next
 
 The drawbacks are of course that the algorithm may get stuck on a local optimum
-instead of the global optimum and that it is difficult to apply in continous
+instead of the global optimum and that it is difficult to apply in continuous
 state spaces. The advantages of these types of algorithms (local search
 heuristic algorithms) are that they require very little constant memory, as long
 as one doesn't care about the path to the solution. They can also be aborted
@@ -50,9 +51,9 @@ mid-run and produce the best solution so far.
 ### 8-Queens
 
 8-Queens is a toy problem where the goal is to place 8 queens on a chess board
-such that no queen attack any other queen. Remember that a queen attacks any
-other queen if it is in the same row, column or diagonal. An attempt at a
-solution:
+such that no queen attack any other queen. Remember that in chess a queen
+attacks any other queen if it is in the same row, column or diagonal. An
+attempt at a solution:
 
     Q . . . . . . .
     . . . . Q . . .
@@ -70,7 +71,7 @@ neighbors** and a **fitness evaluation function** in order to solve a problem
 using simulated annealing. But before we define those things, we start with the
 encoding:
 
-A board of size 4 is represented with an array of numbers: [0, 1, 2, 3].
+A board of size 4 will be represented with an array of numbers: [0, 1, 2, 3].
 board[i] encodes at which row the queens in column i is located. For example,
 the board
 
