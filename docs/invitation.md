@@ -16,8 +16,8 @@ you will solve by yourself or with a colleague. When you are happy with your
 solutions we will discuss your findings.
 
 Reserve your spot!
-Or don't, spaces are unlimited. Actually, tell your friends. They shouldn't
-miss this opportunity, it may not come again.
+Or don't, spaces are unlimited. Actually, tell your friends since it will be
+online over Teams. They shouldn't miss this opportunity, it may not come again.
 
 Still, please respond to this invite so we know how many will attend.
 
