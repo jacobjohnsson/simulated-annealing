@@ -34,7 +34,8 @@ struct _queens {
 static int
 rand_from_to(int min, int max)
 {
-  return rand() / (RAND_MAX / (max - min)) + min;
+  double scale = (double)rand() / RAND_MAX;
+  return min + (int)(scale * (max - min + 1));
 }
 
 
