@@ -161,12 +161,12 @@ For more events, run 'perf list'.
 #### Debian Installation
 
     apt install linux-perf
-    echo 1 > /proc/sys/kernel/perf_event_paranoid
+    echo 1 | sudo tee /proc/sys/kernel/perf_event_paranoid
 
 #### Ubuntu Installation
 
-    apt install operf
-    echo 1 > /proc/sys/kernel/perf_event_paranoid
+    apt install linux-tools
+    echo 1 | sudo tee /proc/sys/kernel/perf_event_paranoid
 
 #### Usage
 
